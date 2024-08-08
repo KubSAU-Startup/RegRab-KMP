@@ -2,6 +2,9 @@ package com.kubsau.regrab.di
 
 import com.kubsau.regrab.network.NetworkRepo
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.serialization.kotlinx.json.json
@@ -17,6 +20,12 @@ val networkModule = module {
 
             install(ContentNegotiation) {
                 json()
+            }
+
+            install(Auth){
+                bearer {
+                    BearerTokens("",null)
+                }
             }
         }
     }
