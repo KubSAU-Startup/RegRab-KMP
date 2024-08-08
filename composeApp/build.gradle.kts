@@ -56,6 +56,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.moko.mvvm)
             implementation(libs.ktor.core)
+            implementation(libs.ktor.negotiation)
+            implementation(libs.ktor.serialization.json)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
