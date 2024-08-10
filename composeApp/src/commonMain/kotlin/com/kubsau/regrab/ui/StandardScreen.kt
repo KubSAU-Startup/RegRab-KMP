@@ -72,7 +72,10 @@ fun StandardScreen(modifier: Modifier = Modifier) {
             LaunchedEffect(Unit) {
                 while (isActive) {
                     val remaining = (target - rotate.value) / target
-                    rotate.animateTo(target, animationSpec = tween((1_000 * remaining).toInt(), easing = LinearEasing))
+                    rotate.animateTo(
+                        target,
+                        animationSpec = tween((1_000 * remaining).toInt(), easing = LinearEasing)
+                    )
                     rotate.snapTo(0f)
                 }
             }

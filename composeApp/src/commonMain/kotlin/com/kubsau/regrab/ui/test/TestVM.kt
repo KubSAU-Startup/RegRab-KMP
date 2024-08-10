@@ -33,7 +33,8 @@ class TestVM(val repo: NetworkRepo) : ViewModel() {
     fun auth() {
         viewModelScope.launch {
             responce.value =
-                repo.auth(AuthRequest(login = login.value, password = password.value)).toString()
+                repo.auth(AuthRequest(login = login.value.trim(), password = password.value.trim()))
+                    .toString()
         }
     }
 

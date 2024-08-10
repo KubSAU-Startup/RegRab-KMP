@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import com.kubsau.regrab.di.networkModule
 import com.kubsau.regrab.di.viewmodelModule
 import com.kubsau.regrab.theme.AppTheme
-import com.kubsau.regrab.ui.StandardScreen
 import com.kubsau.regrab.ui.test.TestScreen
 import org.koin.compose.KoinApplication
 

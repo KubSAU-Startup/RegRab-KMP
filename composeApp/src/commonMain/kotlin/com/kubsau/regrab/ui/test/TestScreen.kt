@@ -18,7 +18,7 @@ fun TestScreen(
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row {
@@ -26,9 +26,7 @@ fun TestScreen(
                 text = viewModel.responce.value
             )
         }
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
+        Column {
             TextField(
                 value = viewModel.login.value,
                 onValueChange = viewModel::addLogin
