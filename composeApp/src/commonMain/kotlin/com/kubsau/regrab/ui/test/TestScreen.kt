@@ -10,39 +10,40 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.koin.compose.koinInject
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.koinScreenModel
 
-@Composable
-fun TestScreen(
-    viewModel: TestVM = koinInject()
-) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row {
-            Text(
-                text = viewModel.responce.value
-            )
-        }
-        Column {
-            TextField(
-                value = viewModel.login.value,
-                onValueChange = viewModel::addLogin
-            )
+class TestScreen : Screen {
 
-            TextField(
-                value = viewModel.password.value,
-                onValueChange = viewModel::addPassword
-            )
+    @Composable
+    override fun Content() {
+        val state = koinScreenModel<TestScreenModel>()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row {
+                Text(
+                    text = state.response.value
+                )
+            }
+            Column {
+                TextField(
+                    value = state.login.value,
+                    onValueChange = state::addLogin
+                )
 
-            Button(
-                onClick = {
-                    viewModel.auth()
+                TextField(
+                    value = state.password.value,
+                    onValueChange = state::addPassword
+                )
+
+                Button(
+                    onClick = state::auth
+                ) {
+                    Text(text = "auth")
                 }
-            ) {
-                Text(text = "auth")
             }
         }
     }
