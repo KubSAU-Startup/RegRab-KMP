@@ -4,7 +4,6 @@ import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.kubsau.regrab.network.NetworkRepo
-import com.kubsau.regrab.network.models.request.AuthRequest
 import kotlinx.coroutines.launch
 
 class TestScreenModel(
@@ -36,8 +35,12 @@ class TestScreenModel(
     fun auth() {
         screenModelScope.launch {
             response.value =
-                repo.auth(AuthRequest(login = login.value.trim(), password = password.value.trim()))
-                    .toString()
+                repo.auth(
+                    mapOf(
+                        "login" to login.value.trim(),
+                        "password" to password.value.trim()
+                    )
+                ).toString()
         }
     }
 

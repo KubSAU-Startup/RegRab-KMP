@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import com.kubsau.regrab.di.navigationModule
 import com.kubsau.regrab.di.networkModule
-import com.kubsau.regrab.di.screenstateModule
+import com.kubsau.regrab.di.screenModelModule
 import com.kubsau.regrab.theme.AppTheme
-import com.kubsau.regrab.ui.test.TestScreen
+import com.kubsau.regrab.ui.auth.AuthScreen
 import org.koin.compose.KoinApplication
 
 @Composable
@@ -15,9 +15,9 @@ internal fun App() = AppTheme {
         modules(
             networkModule,
             navigationModule,
-            screenstateModule
+            screenModelModule
         )
     }) {
-        Navigator(TestScreen())
+        Navigator(AuthScreen())
     }
 }

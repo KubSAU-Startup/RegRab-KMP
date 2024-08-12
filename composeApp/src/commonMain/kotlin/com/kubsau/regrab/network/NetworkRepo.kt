@@ -1,7 +1,6 @@
 package com.kubsau.regrab.network
 
 import com.kubsau.regrab.network.models.BaseResponse
-import com.kubsau.regrab.network.models.request.AuthRequest
 import com.kubsau.regrab.network.models.response.AuthResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -35,13 +34,14 @@ class NetworkRepo(private val client: HttpClient) {
         }
     }
 
-    suspend fun auth(authData: AuthRequest): BaseResponse<AuthResponse>? {
+    suspend fun auth(authData: Map<String, String>): BaseResponse<AuthResponse>? {
         return try {
             val response = client.submitForm(
                 url = Api.AUTH,
                 formParameters = parameters {
-                    append("login", authData.login)
-                    append("password", authData.password)
+                    authData.forEach {
+                        append(it.key, it.value)
+                    }
                 }
             )
 
