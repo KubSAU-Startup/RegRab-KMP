@@ -52,15 +52,23 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
             implementation(libs.voyager.navigator)
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.screenmodel)
+
             implementation(libs.kotlinx.coroutines.core)
+
             implementation(libs.moko.mvvm)
+
             implementation(libs.ktor.core)
             implementation(libs.ktor.logging)
             implementation(libs.ktor.auth)
             implementation(libs.ktor.negotiation)
             implementation(libs.ktor.serialization.json)
+
             implementation(libs.kotlinx.serialization.json)
+            
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
         }
