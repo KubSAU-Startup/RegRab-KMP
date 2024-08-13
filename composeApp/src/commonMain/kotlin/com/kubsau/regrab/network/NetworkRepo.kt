@@ -34,7 +34,7 @@ class NetworkRepo(private val client: HttpClient) {
         }
     }
 
-    suspend fun auth(authData: Map<String, String>): BaseResponse<AuthResponse>? {
+    suspend fun auth(authData: Map<String, String>): ResponseState {
         return try {
             val response = client.submitForm(
                 url = Api.AUTH,
@@ -43,21 +43,30 @@ class NetworkRepo(private val client: HttpClient) {
                         append(it.key, it.value)
                     }
                 }
-            )
+            ).body<BaseResponse<AuthResponse>>()
 
-            response.body<BaseResponse<AuthResponse>>()
+            if (response.success)
+                ResponseState.Success
+            else {
+                when (response.error?.code) {
+                    CONST_WRONG_CREDENTIALS_ERROR -> ResponseState.WrongCredentials
+                    CONST_WRONG_PASSWORD_ERROR -> ResponseState.WrongPassword
+                    else -> ResponseState.UnknownError
+                }
+            }
 
         } catch (e: RedirectResponseException) {
             //3xx
-            null
+            ResponseState.Redirect
         } catch (e: ClientRequestException) {
             //4xx
-            null
+            ResponseState.ClientError
         } catch (e: ServerResponseException) {
             //5xx
-            null
+            ResponseState.ServerError
         } catch (e: ResponseException) {
-            null
+            e.printStackTrace()
+            ResponseState.UnknownError
         }
     }
 }

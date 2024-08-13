@@ -32,6 +32,7 @@ class AuthScreen : Screen {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Text(text = screenModel.displayText.value)
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(.8f),
                     value = screenModel.login.value,
@@ -54,14 +55,14 @@ class AuthScreen : Screen {
                     ),
                     keyboardActions = KeyboardActions(
                         onGo = {
-                            screenModel.auth()
+                            screenModel.authButtonClick()
                         }
                     ),
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
 
-                Button(onClick = screenModel::auth) {
+                Button(onClick = screenModel::authButtonClick) {
                     Text(text = "Auth")
                 }
             }
