@@ -14,6 +14,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -26,16 +28,17 @@ class AuthScreen : Screen {
     @Composable
     override fun Content() {
         val screenModel = koinScreenModel<AuthScreenModel>()
+        val screenState by screenModel.screenState.collectAsState()
         Scaffold { padding ->
             Column(
                 modifier = Modifier.fillMaxSize().padding(padding),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = screenModel.displayText.value)
+                Text(text = screenState.displayText)
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(.8f),
-                    value = screenModel.login.value,
+                    value = screenState.login,
                     onValueChange = screenModel::onLoginInputChange,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
@@ -47,7 +50,7 @@ class AuthScreen : Screen {
 
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(.8f),
-                    value = screenModel.password.value,
+                    value = screenState.password,
                     onValueChange = screenModel::onPasswordInputChange,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,

@@ -1,73 +1,110 @@
 package com.kubsau.regrab.ui.auth
 
-import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.kubsau.regrab.network.NetworkRepo
 import com.kubsau.regrab.network.ResponseState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AuthScreenModel(
     private val repo: NetworkRepo
 ) : ScreenModel {
-    var login = mutableStateOf("vasilenko.i2")
-        private set
 
-    var password = mutableStateOf("789012")
-        private set
-
-    var displayText = mutableStateOf("")
-        private set
+    val screenState = MutableStateFlow(AuthScreenState.EMPTY)
 
     fun onLoginInputChange(login: String) {
-        this.login.value = login
+        val newValue = screenState.value.copy(
+            login = login,
+            showWrongCredentialsError = false
+        )
+
+        screenState.update { newValue }
     }
 
     fun onPasswordInputChange(password: String) {
-        this.password.value = password
+        val newValue = screenState.value.copy(
+            password = password,
+            showWrongCredentialsError = false
+        )
+
+        screenState.update { newValue }
     }
 
     fun authButtonClick() {
         screenModelScope.launch(Dispatchers.Default) {
             val response = repo.auth(
                 mapOf(
-                    "login" to login.value.trim(),
-                    "password" to password.value.trim()
+                    "login" to screenState.value.login.trim(),
+                    "password" to screenState.value.password.trim()
                 )
             )
 
             when (response) {
                 ResponseState.ClientError -> {
-                    displayText.value = "Client error"
+                    val newState = screenState.value.copy(
+                        displayText = "Client error"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.Redirect -> {
-                    displayText.value = "Redirect"
+                    val newState = screenState.value.copy(
+                        displayText = "Redirect"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.ServerError -> {
-                    displayText.value = "Server error"
+                    val newState = screenState.value.copy(
+                        displayText = "Server error"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.Success -> {
-                    displayText.value = "Success"
+                    val newState = screenState.value.copy(
+                        displayText = "Success"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.UnknownError -> {
-                    displayText.value = "Unknown error"
+                    val newState = screenState.value.copy(
+                        displayText = "Unknown error"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.WrongCredentials -> {
-                    displayText.value = "Wrong credentials"
+                    val newState = screenState.value.copy(
+                        displayText = "Wrong credentials"
+                    )
+
+                    screenState.update { newState }
                 }
 
                 ResponseState.WrongPassword -> {
-                    displayText.value = "Wrong password"
+                    val newState = screenState.value.copy(
+                        displayText = "Wrong password"
+                    )
+
+                    screenState.update { newState }
                 }
 
-                ResponseState.BadRequest ->{
-                   displayText.value = "Bad request"
+                ResponseState.BadRequest -> {
+                    val newState = screenState.value.copy(
+                        displayText = "Bad request"
+                    )
+
+                    screenState.update { newState }
                 }
             }
         }
