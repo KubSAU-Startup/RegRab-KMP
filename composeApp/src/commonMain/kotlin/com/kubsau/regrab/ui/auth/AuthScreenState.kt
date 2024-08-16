@@ -3,12 +3,13 @@ package com.kubsau.regrab.ui.auth
 data class AuthScreenState(
     val login: String,
     val password: String,
-    val displayText:String,
+    val displayText: String,
     val isLoading: Boolean,
     val isPasswordVisible: Boolean,
     val showAuthError: Boolean,
     val showWrongAccountTypeError: Boolean,
     val showWrongCredentialsError: Boolean,
+    val enableNavigation: Boolean
 ) {
     companion object {
         val EMPTY = AuthScreenState(
@@ -19,7 +20,8 @@ data class AuthScreenState(
             isPasswordVisible = false,
             showAuthError = false,
             showWrongAccountTypeError = false,
-            showWrongCredentialsError = false
+            showWrongCredentialsError = false,
+            enableNavigation = false
         )
     }
 }

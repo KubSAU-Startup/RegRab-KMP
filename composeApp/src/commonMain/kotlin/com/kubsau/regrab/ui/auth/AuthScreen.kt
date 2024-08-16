@@ -23,12 +23,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.kubsau.regrab.ui.test.TestScreen
 
 class AuthScreen : Screen {
     @Composable
     override fun Content() {
         val screenModel = koinScreenModel<AuthScreenModel>()
         val screenState by screenModel.screenState.collectAsState()
+        val navigator = LocalNavigator.currentOrThrow
+
+        if (screenState.enableNavigation){
+            navigator.push(TestScreen())
+        }
+
         Scaffold { padding ->
             Column(
                 modifier = Modifier.fillMaxSize().padding(padding),

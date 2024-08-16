@@ -1,4 +1,4 @@
-package com.kubsau.regrab.di
+package com.kubsau.regrab.di.modules
 
 import org.koin.dsl.module
 

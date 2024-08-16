@@ -1,5 +1,6 @@
-package com.kubsau.regrab.di
+package com.kubsau.regrab.di.modules
 
+import com.kubsau.regrab.network.KtorEngineFactory
 import com.kubsau.regrab.network.NetworkRepo
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -15,8 +16,10 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val networkModule = module {
+    singleOf(::KtorEngineFactory)
+
     single {
-        HttpClient {
+        HttpClient(engineFactory = get<KtorEngineFactory>().getEngine()) {
             defaultRequest {
                 url("https://kubsau-testbackend.melod1n.dedyn.io/")
                 contentType(ContentType.Application.FormUrlEncoded)

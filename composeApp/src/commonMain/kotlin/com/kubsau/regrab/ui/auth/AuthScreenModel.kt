@@ -4,13 +4,15 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.kubsau.regrab.network.NetworkRepo
 import com.kubsau.regrab.network.ResponseState
+import com.kubsau.regrab.storage.AccountStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AuthScreenModel(
-    private val repo: NetworkRepo
+    private val repo: NetworkRepo,
+    private val storage: AccountStorage
 ) : ScreenModel {
 
     val screenState = MutableStateFlow(AuthScreenState.EMPTY)
@@ -69,7 +71,7 @@ class AuthScreenModel(
 
                 ResponseState.Success -> {
                     val newState = screenState.value.copy(
-                        displayText = "Success"
+                        enableNavigation = true
                     )
 
                     screenState.update { newState }

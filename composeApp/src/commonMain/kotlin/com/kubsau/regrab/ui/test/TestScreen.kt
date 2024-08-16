@@ -8,16 +8,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 
 class TestScreen : Screen {
-
     @Composable
     override fun Content() {
-        val state = koinScreenModel<TestScreenModel>()
+        val screenModel = koinScreenModel<TestScreenModel>()
+        val screenState by screenModel.screenState.collectAsState()
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -25,25 +27,8 @@ class TestScreen : Screen {
         ) {
             Row {
                 Text(
-                    text = state.response.value
+                    text = screenState.displayText
                 )
-            }
-            Column {
-                TextField(
-                    value = state.login.value,
-                    onValueChange = state::addLogin
-                )
-
-                TextField(
-                    value = state.password.value,
-                    onValueChange = state::addPassword
-                )
-
-                Button(
-                    onClick = state::auth
-                ) {
-                    Text(text = "auth")
-                }
             }
         }
     }

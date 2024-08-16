@@ -2,6 +2,7 @@ package com.kubsau.regrab.network
 
 import com.kubsau.regrab.network.models.BaseResponse
 import com.kubsau.regrab.network.models.response.AuthResponse
+import com.kubsau.regrab.storage.AccountStorage
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -14,7 +15,10 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.parameters
 
-class NetworkRepo(private val client: HttpClient) {
+class NetworkRepo(
+    private val client: HttpClient,
+    private val storage: AccountStorage
+) {
     suspend fun getDocs(): String {
         return try {
             client.get {
@@ -45,9 +49,14 @@ class NetworkRepo(private val client: HttpClient) {
                 }
             ).body<BaseResponse<AuthResponse>>()
 
-            if (response.success)
+            if (response.success) {
+                storage.updateAccount { account ->
+                    account.copy(
+                        token = response.response?.accessToken.toString()
+                    )
+                }
                 ResponseState.Success
-            else {
+            } else {
                 when (response.error?.code) {
                     CONST_WRONG_CREDENTIALS_ERROR -> ResponseState.WrongCredentials
                     CONST_WRONG_PASSWORD_ERROR -> ResponseState.WrongPassword
