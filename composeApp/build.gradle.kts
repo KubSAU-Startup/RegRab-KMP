@@ -29,11 +29,6 @@ kotlin {
         instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
 
-    js {
-        browser()
-        binaries.executable()
-    }
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -68,9 +63,12 @@ kotlin {
             implementation(libs.ktor.serialization.json)
 
             implementation(libs.kotlinx.serialization.json)
-            
+
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+
+            implementation(libs.kstore)
+            implementation(libs.kstore.file)
         }
 
         commonTest.dependencies {
@@ -85,11 +83,6 @@ kotlin {
             implementation(libs.androidx.activityCompose)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
-        }
-
-        jsMain.dependencies {
-            implementation(compose.html.core)
-            implementation(libs.ktor.client.js)
         }
 
         iosMain.dependencies {
