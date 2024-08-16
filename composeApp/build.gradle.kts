@@ -69,6 +69,8 @@ kotlin {
 
             implementation(libs.kstore)
             implementation(libs.kstore.file)
+
+            implementation(libs.appDir)
         }
 
         commonTest.dependencies {

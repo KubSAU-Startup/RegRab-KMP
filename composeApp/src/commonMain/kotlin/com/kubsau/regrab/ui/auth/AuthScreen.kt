@@ -34,7 +34,7 @@ class AuthScreen : Screen {
         val screenState by screenModel.screenState.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
 
-        if (screenState.enableNavigation){
+        if (screenState.enableNavigation) {
             navigator.push(TestScreen())
         }
 

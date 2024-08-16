@@ -5,9 +5,10 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.kubsau.regrab.di.appModule
 import com.kubsau.regrab.theme.AppTheme
 import com.kubsau.regrab.ui.auth.AuthScreen
+import me.sujanpoudel.utils.paths.appDataDirectory
 import org.koin.compose.KoinApplication
 
-var appDir = ""
+var appDir = appDataDirectory("com.kubsau.regrab")
 
 @Composable
 internal fun App() = AppTheme {

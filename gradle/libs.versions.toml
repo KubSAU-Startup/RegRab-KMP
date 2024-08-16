@@ -2,7 +2,7 @@
 
 kotlin = "2.0.20-RC"
 compose = "1.7.0-alpha02"
-agp = "8.5.1"
+agp = "8.5.2"
 androidx-activityCompose = "1.9.1"
 androidx-uiTest = "1.6.8"
 voyager = "1.1.0-beta02"
@@ -13,6 +13,7 @@ ktor = "3.0.0-beta-2"
 kotlinx-serialization = "1.7.1"
 koin = "4.0.0-RC1"
 kstore = "0.8.0"
+appDir = "0.2.2"
 
 [libraries]
 
@@ -35,7 +36,7 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-ktor-logging = { module="io.ktor:ktor-client-logging",version.ref="ktor" }
+ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
@@ -44,6 +45,8 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 
 kstore = { module = "io.github.xxfast:kstore", version.ref = "kstore" }
 kstore-file = { module = "io.github.xxfast:kstore-file", version.ref = "kstore" }
+
+appDir = { module = "me.sujanpoudel.multiplatform.utils:multiplatform-paths", version.ref = "appDir" }
 
 [plugins]
 
