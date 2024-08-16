@@ -8,7 +8,6 @@ androidx-uiTest = "1.6.8"
 voyager = "1.1.0-beta02"
 buildConfig = "5.3.5"
 kotlinx-coroutines = "1.9.0-RC"
-moko-mvvm = "0.16.1"
 ktor = "3.0.0-beta-2"
 kotlinx-serialization = "1.7.1"
 koin = "4.0.0-RC1"
@@ -28,8 +27,6 @@ voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", vers
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-
-moko-mvvm = { module = "dev.icerock.moko:mvvm-compose", version.ref = "moko-mvvm" }
 
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }

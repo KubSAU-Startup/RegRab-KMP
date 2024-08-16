@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccountStoreModel(
-    val token: String = ""
+    val token: String? = null
 ) {
     companion object {
         val EMPTY = AccountStoreModel()

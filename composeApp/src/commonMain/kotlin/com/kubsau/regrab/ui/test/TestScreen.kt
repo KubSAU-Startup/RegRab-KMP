@@ -28,6 +28,11 @@ class TestScreen : Screen {
                     text = screenState.displayText
                 )
             }
+            Row {
+                Text(
+                    text = "Test screen"
+                )
+            }
         }
     }
 }

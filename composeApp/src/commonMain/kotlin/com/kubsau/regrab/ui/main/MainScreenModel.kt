@@ -1,4 +1,4 @@
-package com.kubsau.regrab.ui.test
+package com.kubsau.regrab.ui.main
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -7,16 +7,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class TestScreenModel(
+class MainScreenModel(
     private val storage: AccountStorage
 ) : ScreenModel {
-    val screenState = MutableStateFlow(TestScreenState.EMPTY)
+    val screenState = MutableStateFlow(MainScreenState.EMPTY)
 
     init {
         screenModelScope.launch {
             screenState.update {
                 screenState.value.copy(
-                    displayText = storage.getToken().toString()
+                    token = storage.getToken()
                 )
             }
         }

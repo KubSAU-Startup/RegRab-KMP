@@ -54,8 +54,6 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.moko.mvvm)
-
             implementation(libs.ktor.core)
             implementation(libs.ktor.logging)
             implementation(libs.ktor.auth)

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import com.kubsau.regrab.di.appModule
 import com.kubsau.regrab.theme.AppTheme
-import com.kubsau.regrab.ui.auth.AuthScreen
+import com.kubsau.regrab.ui.main.MainScreen
 import me.sujanpoudel.utils.paths.appDataDirectory
 import org.koin.compose.KoinApplication
 
@@ -15,6 +15,7 @@ internal fun App() = AppTheme {
     KoinApplication(application = {
         modules(appModule)
     }) {
-        Navigator(AuthScreen())
+        Navigator(MainScreen())
     }
 }
+
